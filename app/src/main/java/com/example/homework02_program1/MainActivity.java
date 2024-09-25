@@ -1,3 +1,12 @@
+//============================================================
+// Author: Isaac Shields
+// Date  : 9-25-2024
+// Desc  : Program that changes the app's background
+//         based on the RGB values you select with the sliders
+//============================================================
+
+
+
 package com.example.homework02_program1;
 
 import android.app.Activity;
@@ -22,6 +31,9 @@ import androidx.core.view.WindowInsetsCompat;
 
 import java.util.ArrayList;
 
+
+
+//1: get the variables set up
 public class MainActivity extends AppCompatActivity {
 
     SeekBar sb_ma_red;
@@ -61,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
         fillList();
         clickListItem();
 
+        //2: Setup listeners for the seekbars
         sb_ma_red.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
@@ -110,6 +123,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //3: setup save button listener
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -121,6 +135,8 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
+    //4: Listener for changing color to saved color
     private void clickListItem()
     {
         ma_lv_colorList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -135,6 +151,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    //5: Update values when needed
     private void updateValue()
     {
         tv_ma_redNum.setText(String.valueOf(sb_ma_red.getProgress()));
@@ -145,6 +162,8 @@ public class MainActivity extends AppCompatActivity {
         changeBackColor(hexNum);
     }
 
+
+    //6: change color to the RGB value provided
     private void fillInfoFromList(int r, int g, int b)
     {
         sb_ma_red.setProgress(r);
@@ -153,11 +172,13 @@ public class MainActivity extends AppCompatActivity {
         updateValue();
     }
 
+    //7: Change color based on Hex value
     private void changeBackColor(String hexValue)
     {
         mainLayout.setBackgroundColor(Color.parseColor(hexValue));
     }
 
+    //8: reset background color to white when a color is saved
     private void resetBackground()
     {
         sb_ma_red.setProgress(sb_ma_red.getMax());
@@ -166,14 +187,18 @@ public class MainActivity extends AppCompatActivity {
         updateValue();
     }
 
+
+    //9: add color to list
     private void addColorToList()
     {
+        //String.format("#%02X%02X%02X") found online
         String hexVal = String.format("#%02X%02X%02X", sb_ma_red.getProgress(), sb_ma_green.getProgress(), sb_ma_blue.getProgress());
         ColorInfo ci = new ColorInfo(sb_ma_red.getProgress(), sb_ma_green.getProgress(), sb_ma_blue.getProgress(), hexVal);
         listOfColors.add(ci);
         adapter.notifyDataSetChanged();
     }
 
+    //10: Fill list with saved colors
     private void fillList()
     {
         adapter = new ColorListAdapter(this, listOfColors);

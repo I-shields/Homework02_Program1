@@ -9,7 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-
+//Adapter to fill the list
 public class ColorListAdapter extends BaseAdapter
 {
 
@@ -50,6 +50,7 @@ public class ColorListAdapter extends BaseAdapter
         TextView blue = view.findViewById(R.id.cc_tv_blueInfo);
         TextView hexValue = view.findViewById(R.id.cc_tv_hexValue);
 
+        //fill information
         ColorInfo ci = listOfColors.get(i);
         red.setText("Red:   " + String.valueOf(ci.getRedValue()));
         green.setText("Green:   " + String.valueOf(ci.getGreenValue()));
@@ -69,6 +70,9 @@ public class ColorListAdapter extends BaseAdapter
         return view;
     }
 
+    //This code was found online: it calculates the colors intensity and the above
+    //if/else takes the returned boolean value to changes the text color in the
+    //saved color
     private boolean colorBrightness(int r, int g, int b)
     {
         double brightness = (0.299 * r) + (0.587 * g) + (0.114 * b);

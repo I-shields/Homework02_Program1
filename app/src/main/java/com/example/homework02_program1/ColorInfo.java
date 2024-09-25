@@ -1,5 +1,8 @@
 package com.example.homework02_program1;
 
+
+//Class to save RGB and hex values, also includes getters and setters
+
 public class ColorInfo
 {
     private int redValue;
